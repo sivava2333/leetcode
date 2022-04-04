@@ -1,1 +1,35 @@
+# 1. 原题链接
+[1721. Swapping Nodes in a Linked List](https://leetcode.com/problems/swapping-nodes-in-a-linked-list/)
 
+# 2. 思路
++ 双指针
+两个指针相差k - 1步，一起遍历链表，分别记录从头数第k个节点和从尾数第k个节点，交换这两个节点的值
+
+# 3. 代码
+```
+class Solution {
+    public ListNode swapNodes(ListNode head, int k) {
+        ListNode fast = head;
+        int index = 1;
+
+        while (index < k && fast != null) {
+            fast = fast.next;
+            index++;
+        }
+
+        ListNode swap = fast;
+
+        ListNode slow = head;
+        while (fast.next != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+
+        int tmp = slow.val;
+        slow.val = swap.val;
+        swap.val = tmp;
+
+        return head;
+    }
+}
+```
